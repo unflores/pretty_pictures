@@ -1,5 +1,5 @@
-#obviously these need to be updated
-cloudspace:
+#obviously these need to be updated.  account_key is arbitrary, so name it something meaningful
+account_key:
   aws_access_key_id: id
   aws_secret_access_key: key
   aws_region: (us-east-1|other_data_center)

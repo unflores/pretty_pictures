@@ -1,20 +1,18 @@
 #!/usr/bin/ruby
 require 'rubygems'
 require 'fog'
-require 'sequel'
 
-config = File.open( 'servers.yml' ) { |yf| YAML::load( yf ) }
+config = File.open( 'accounts.yml' ) { |yf| YAML::load( yf ) }
 
-servers = ARGV[1].nil? ? [ config[ARGV[1]] ] : config
+accounts = ARGV[1].nil? ? [ config[ARGV[1]] ] : config
 
 active_requests = [] #not really sure what to do with these but I'll keep them around.
 
-servers.each do |key, server|
-	abort(server.inspect)
+accounts.each do |key, account|
 	instance = Fog::Compute.new(
 			:provider           => 'AWS',
-			:aws_access_key_id  =>  server['aws_access_key_id'],
-			:aws_secret_access_key =>  server['aws_secret_access_key'] 
+			:aws_access_key_id  =>  account['aws_access_key_id'],
+			:aws_secret_access_key =>  account['aws_secret_access_key'] 
 	)
 	instance.volumes.each do |volume|
 		active_requests = instance.create_snapshot volume.id, "#{key} - #{Time.now}"
