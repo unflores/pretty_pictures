@@ -1,0 +1,8 @@
+#obviously these need to be updated
+cloudspace:
+  aws_access_key_id: id
+  aws_secret_access_key: key
+  aws_region: (us-east-1|other_data_center)
+  user_id: [0-9]*
+  graph_template_ids: Array of integers
+  tree_id: [0-9]+
