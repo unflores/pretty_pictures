@@ -4,7 +4,7 @@ require 'fog'
 
 config = File.open( 'accounts.yml' ) { |yf| YAML::load( yf ) }
 
-accounts = ARGV[1].nil? ? config : config[ARGV[1]] ]
+accounts = ARGV[1].nil? ? config : config[ARGV[1]]
 
 active_requests = [] #not really sure what to do with these but I'll keep them around.
 
@@ -15,7 +15,7 @@ accounts.each do |key, account|
 			:aws_secret_access_key =>  account['aws_secret_access_key'] 
 	)
 	instance.volumes.each do |volume|
-		puts "requesting snapshot for #{key}[#{volume}]"
+		puts "requesting snapshot for #{key}[#{volume.id}]"
 		active_requests = instance.create_snapshot volume.id, "#{key} - #{Time.now}"
 	end
 end
